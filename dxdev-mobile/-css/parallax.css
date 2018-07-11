@@ -1,0 +1,92 @@
+
+
+#intro{
+	height: 264px;
+	margin: 0 auto;
+	padding: 0;
+}
+
+
+#second{
+	background: none repeat scroll 0 0 #FFFFFF;
+	border-top: 1px solid #EEEEEE;
+	height: auto;
+	margin: 0 auto;
+	overflow: hidden;
+	padding: 40px 0 0 0;
+	position: relative;
+	z-index:2;
+}
+
+#second .bg{
+	background: url("../img/parallax/trainers.png") 50% 0 no-repeat fixed;
+	height: auto;
+	margin: 0 auto;
+	padding: 0;
+	position: absolute;
+	width: 900px;
+	z-index: 200;
+}
+
+#third{
+	background: url("../img/parallax/dotted-worldmap.png") no-repeat fixed 50% 50% #F6F6F6;
+	border-top: 1px solid #E6E6E6;
+	padding: 40px 0;	
+	position: relative;
+	z-index:2;
+}
+
+#forth {
+	background: none repeat scroll 0 0 #F6F6F6;
+	border-top: 1px solid #E6E6E6;
+	padding: 40px 0;	
+	position: relative;
+	z-index:2;
+}
+
+#fifth{
+	background: none repeat scroll 0 0 #FFFFFF;
+	border-bottom: 1px solid #DFDFDF;
+	border-top: 1px solid #E6E6E6;
+	margin: 0 auto;
+	padding: 40px 0px 5px 0px;	
+	position: relative;
+	z-index:2;
+}
+
+.story{
+	margin: 0 auto;
+	min-width: 980px;
+	overflow: auto;
+	width: 980px;
+}
+
+.story .float-left, .story .float-right{
+	padding: 100px 0 0 0;
+	position: relative;
+	width: 350px;	
+}
+
+
+
+
+
+
+@media (min-width: 1300px) {
+#intro{
+	height: 347px;
+}
+ 
+}
+@media (max-width: 979px) {
+#intro{
+	height: 200px;
+}
+
+}
+@media (max-width: 767px) {
+#intro{
+	height: 198px;
+}
+
+}

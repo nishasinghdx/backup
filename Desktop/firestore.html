@@ -1,0 +1,43 @@
+<button onClick="addDataFunction();">Add Data</button>
+</br></br></br></br>
+<button onClick="viewDataFunction();">View Data</button>
+<script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-firestore.js"></script>﻿
+<script type="text/javascript">
+firebase.initializeApp({
+apiKey: 'AIzaSyCtDfx9Wc6VvR4t8xKnnXRCsKceUd8DjEU',
+authDomain: 'firestore-project-e3bb0.firebaseio.com',
+projectId: 'firestore-project-e3bb0'
+});
+
+// Initialize Cloud Firestore through Firebase
+ var db = firebase.firestore();
+
+function addDataFunction(){
+  alert("addDataFunction called");
+  db.collection("users").add({
+    first: "Alan",
+    middle: "Mathison",
+    last: "Turing",
+    born: 1912
+})
+.then(function(docRef) {
+    console.log("Document written with ID: ", docRef.id);
+})
+.catch(function(error) {
+    console.error("Error adding document: ", error);
+});
+}
+
+function viewDataFunction(){
+  alert("viewDataFunction called");
+  db.collection("users").get().then((querySnapshot) => {
+    querySnapshot.forEach((doc) => {
+        console.log(`${doc.id} => ${doc.data()}`);
+        var data = doc.data();
+        var data1 = JSON.stringify(data);
+        alert(data1);
+    });
+});
+}
+</script>

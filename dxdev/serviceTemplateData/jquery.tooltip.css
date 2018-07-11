@@ -1,0 +1,30 @@
+div.jquery-gdakram-tooltip { 
+  width: 640px;
+  color: #000000;
+  font-size: 12px;
+	position: absolute;
+	z-index: 10000;
+	top: 0px;
+	left: 0px;
+	display: none;
+}
+
+div.jquery-gdakram-tooltip div.content { 
+ 
+  background-color: #ffffff;
+  width: 580px;
+  min-height: 200px;
+  float: left;
+  padding: 10px;
+}
+
+div.jquery-gdakram-tooltip div.content h1 {
+  font-size: 16px;
+  border-bottom: 1px solid #000000;
+  padding-bottom: 5px;
+  color:#000000!important;
+}
+
+
+
+

@@ -1,0 +1,45 @@
+/*
+Theme Name: dxdev_mobile
+Theme URI: dxdev_mobile
+Description: The 2010 theme for WordPress is stylish, customizable, simple, and readable -- make it yours with a custom menu, header image, and background. Twenty Ten supports six widgetized areas (two in the sidebar, four in the footer) and featured images (thumbnails for gallery posts and custom header images for posts and pages). It includes stylesheets for print and the admin Visual Editor, special styles for posts in the "Asides" and "Gallery" categories, and has an optional one-column page template that removes the sidebar.
+Author: the WordPress team
+Author URI: http://wordpress.org/
+Version: 1.5
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Tags: black, blue, white, two-columns, fixed-width, custom-header, custom-background, threaded-comments, sticky-post, translation-ready, microformats, rtl-language-support, editor-style, custom-menu, flexible-header
+Text Domain: twentyten
+*/
+@media screen and (max-width:1200px){
+div#third {
+text-align: center !important;
+}
+#third .span3 {
+width: 100% !important;
+}
+}
+@media screen and (max-width:1024px){
+.zopim{
+    display: block !important;
+    margin: 0px !important;
+    padding: 0px !important;
+    border: 0px !important;
+    background: transparent !important;
+    overflow: hidden !important;
+    position: fixed !important;
+    z-index: 16000001 !important;
+    opacity: 1 !important;
+    transform: translateY(0%) !important;
+    width: 115px !important;
+    height: 30px !important;
+    right: 15px !important;
+    bottom: 15px !important;
+top: inherit !important;
+}
+}
+@media screen and (max-width:480px){
+.block-thumbnail i.icon-3x.fa-users {
+   background: #289DCC !important;
+   color: #fff !important;
+}
+}

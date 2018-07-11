@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Time to Hack: Firebase with JavaScript and jQuery</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+  <style type="text/css"> #contacts p, #contacts p.lead{ margin: 0; } </style>
+</head>
+<body>
+  <div class="container">
+  </br></br></br></br>
+    <button type="button" name="button" class="viewdata" style="float:right;color:#0000ff">view all data</button>
+    <h1>Contact Store Application</h1>
+    <hr/>
+    <div class="row">
+      <div class="col-md-6">
+        <form method="post" name="contactForm">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" required placeholder="Enter name">
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email" required placeholder="Enter Email">
+          </div>
+          <h3>Location</h3>
+          <div class="form-group">
+            <label for="city">City</label>
+            <input type="text" class="form-control" id="city" placeholder="Enter City">
+          </div>
+          <div class="form-group">
+            <label for="email">State</label>
+            <input type="text" class="form-control" id="state" placeholder="Enter State">
+          </div>
+          <div class="form-group">
+            <label for="zip">Zip</label>
+            <input type="text" class="form-control" id="zip" placeholder="Enter Zip Code">
+          </div>
+          <button type="submit" class="btn btn-primary addValue">Submit</button>
+        </form>
+      </div>
+      <div class="col-md-6">
+      <div class="col-md-12" id="viewdatadiv">
+        Data will be displayed here :
+      </div>
+    </br></br></br></br>
+      <div class="col-md-12" id="updateformdiv" style="display:none">
+        Update form :
+        <form action="">
+          <div class="form-group">
+          <label for="key">key</label>
+          <input type="text" class="form-control key" id="key">
+          </div>
+          <div class="form-group">
+          <label for="name">name:</label>
+          <input type="text" class="form-control name" id="name">
+          </div>
+          <div class="form-group">
+          <label for="email">email:</label>
+          <input type="email" class="form-control email" id="email">
+          </div>
+          <button type="submit" class="btn btn-default">Submit</button>
+         </form>
+      </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) and Bootstrap -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+  <!-- Include Firebase Library and Config-->
+  <script src="https://www.gstatic.com/firebasejs/4.5.0/firebase.js"></script>
+  <!-- Contacts Store JavaScript -->
+  <script type="text/javascript">
+
+  // file: script.js
+// Initialize Firebase
+var config = {
+  // apiKey: "AIzaSyBuz11XI9my59gnCRyHnoZ8-tzmxiODeUA",
+    apiKey: "AIzaSyA4boknmpRVY5113Kgy48ygbJ8BUTcymBU",
+    // authDomain: "phd25-8c318.firebaseapp.com",
+    authDomain: "my-project-bbf50.firebaseio.com",
+    // databaseURL: "https://phd25-8c318.firebaseio.com",
+    databaseURL: "https://my-project-bbf50.firebaseio.com/",
+    // projectId: "phd25-8c318",
+    projectId: "my-project-bbf50",
+    // storageBucket: "phd25-8c318.appspot.com",
+    storageBucket: "my-project-bbf50.appspot.com",
+    // messagingSenderId: "354042550598"
+    messagingSenderId: "548569980880"
+};
+firebase.initializeApp(config);
+
+//create firebase database reference
+var dbRef = firebase.database();
+var contactsRef = dbRef.ref('/message_list/');
+
+$('.addValue').on("click", function( event ) {
+    event.preventDefault();
+    if( $('#name').val() != '' || $('#email').val() != '' ){
+      contactsRef.push({
+        name: $('#name').val(),
+        email: $('#email').val(),
+        location: {
+          city: $('#city').val(),
+          state: $('#state').val(),
+          zip: $('#zip').val()
+        }
+      })
+      contactForm.reset();
+    } else {
+      alert('Please fill atleast name or email!');
+    }
+  });
+
+$('.viewdata').on("click", function( event ) {
+  contactsRef.once('value').then(function(snapshot) {
+  var data = snapshot.val();
+  var data1 = JSON.stringify(data);
+  var parsed = JSON.parse(data1);
+
+  var html = "<table border='1|1'>";
+      html+="<tr>";
+      html+="<td>"+"ID"+"</td>";
+      html+="<td>"+"NAME"+"</td>";
+      html+="<td>"+"EMAIL"+"</td>";
+      html+="<td>"+"ACTION"+"</td>";
+      html+="</tr>";
+  for (var key in parsed ) {
+      html+="<tr>";
+      html+="<td>"+key+"</td>";
+      html+="<td>"+parsed[key].name+"</td>";
+      html+="<td>"+parsed[key].email+"</td>";
+      html+="<td><button onClick=deleteFunction('"+key+"');>delete</button></td>";
+      html+="</tr>";
+
+  }
+  html+="</table>";
+  document.getElementById('viewdatadiv').innerHTML = html;
+
+
+   });
+});
+
+function deleteFunction(key){
+  alert("deleteFunction called");
+  alert(key);
+  alert(contactsRef);
+  contactsRef.child(key).remove();
+}
+function updateFunction(name){
+  alert("update function called");
+  document.getElementById('updateformdiv').style.display="block";
+  document.querySelector('.key').value="key";
+  document.querySelector('.name').value=name;
+  document.querySelector('.email').value="email";
+
+  contactsRef.orderByChild('name').equalTo(name).on("value", function(snapshot) {
+    console.log(snapshot.val());
+    var data = snapshot.val();
+    var data1 = JSON.stringify(data);
+    alert(data1);
+});
+
+}
+
+  </script>
+</body>
+</html>

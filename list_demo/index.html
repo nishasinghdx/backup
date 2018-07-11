@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <title>List Example</title>
+		<script type='text/javascript' src='jquery.min.js'></script>
+		<script src="mapdata.js"></script>
+		<script src="europemap.js"></script>
+		<script src="list.js"></script>
+    <script>
+      simplemaps_list.map=simplemaps_europemap;
+      simplemaps_list.include=["GB","FR","ES","IT","LU","BE","NL","DE","PT","DK","CH","IE","AT"];
+    </script>
+    </head>
+    <body>
+		<h1>List Example</h1>
+		<!-- <div style="width: 15%; float: left">
+			<div style="margin-bottom: 20px">
+				<ul id="simplemaps_list"></ul>
+			</div>
+		</div>			 -->
+		<div  style="width: 85%; float: left">
+			<div id="map"></div>
+		</div>
+	</body>
+</html>
